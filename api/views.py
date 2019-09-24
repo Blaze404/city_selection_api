@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from .models import Countries, States, Cities
 from django.views.decorators.csrf import csrf_exempt
-
+import json
 
 # Create your views here.
 def index(request):
@@ -18,7 +18,8 @@ def country(request):
 @csrf_exempt
 def state(request):
     if request.method == 'POST':
-        country_id = request.POST.get('id')
+        data = json.loads(request.body)
+        country_id = data.get('id')
         print('######### country id: ', country_id)
         return JsonResponse({
             'values': list(States.objects.filter(country_id=country_id).values())
@@ -27,7 +28,8 @@ def state(request):
 @csrf_exempt
 def city(request):
     if request.method == 'POST':
-        state_id = request.POST.get('id')
+        data = json.loads(request.body)
+        state_id = data.get('id')
         print('######### state id: ', state_id)
 
         return JsonResponse({
