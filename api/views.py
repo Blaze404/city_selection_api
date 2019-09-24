@@ -11,7 +11,7 @@ def index(request):
 @csrf_exempt
 def country(request):
     if request.method == 'POST':
-        return JsonResponse(Countries.objects.all())
+        return JsonResponse(Countries.objects.all(), safe=False)
 
 @csrf_exempt
 def state(request):
