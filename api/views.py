@@ -19,6 +19,7 @@ def country(request):
 def state(request):
     if request.method == 'POST':
         country_id = request.POST.get('id')
+        print('######### country id: ', country_id)
         return JsonResponse({
             'values': list(States.objects.filter(country_id=country_id).values())
         }, safe=False)
@@ -27,6 +28,8 @@ def state(request):
 def city(request):
     if request.method == 'POST':
         state_id = request.POST.get('id')
+        print('######### state id: ', state_id)
+
         return JsonResponse({
             'values': list(Cities.objects.filter(state_id=state_id).values())
         }, safe=False)
