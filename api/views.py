@@ -17,8 +17,16 @@ def country(request):
 
 @csrf_exempt
 def state(request):
-    pass
+    if request.method == 'POST':
+        country_id = request.POST.get('id')
+        return JsonResponse({
+            'values': list(Countries.objects.filter(country_id=country_id).values())
+        }, safe=False)
 
 @csrf_exempt
 def city(request):
-    pass
+    if request.method == 'POST':
+        state_id = request.POST.get('id')
+        return JsonResponse({
+            'values': list(Countries.objects.filter(state_id=state_id).values())
+        }, safe=False)
