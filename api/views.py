@@ -19,17 +19,20 @@ def country(request):
 def state(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        country_id = data.get('id')
+        # country_id = data.get('id')
+        country_id = data
         print('######### country id: ', country_id)
         return JsonResponse({
             'values': list(States.objects.filter(country_id=country_id).values())
         }, safe=False)
 
+
 @csrf_exempt
 def city(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        state_id = data.get('id')
+        # state_id = data.get('id')
+        state_id = data
         print('######### state id: ', state_id)
 
         return JsonResponse({
