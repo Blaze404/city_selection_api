@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from .models import Countries, States, Cities
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .data import patient_data
 
 # Create your views here.
 def index(request):
@@ -38,3 +39,7 @@ def city(request):
         return JsonResponse({
             'values': list(Cities.objects.filter(state_id=state_id).values())
         }, safe=False)
+
+def patients(request):
+    if request.method == 'POST':
+        return JsonResponse(patient_data)
